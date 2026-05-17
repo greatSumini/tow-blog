@@ -165,6 +165,35 @@ const formattedDate = pubDate.toLocaleDateString('ko-KR', {
     color: #555;
   }
 
+  /* 인트로 박스 */
+  .post-content :global(.intro-box) {
+    background: #f0f9f4;
+    border: 1px solid #b2e4c8;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 24px 0 32px;
+    font-size: 15px;
+    line-height: 2.0;
+    color: #333;
+  }
+
+  /* CTA 박스 */
+  .post-content :global(.cta) {
+    background: #03c75a;
+    color: #fff;
+    border-radius: 8px;
+    padding: 22px 24px;
+    text-align: center;
+    margin: 40px 0 20px;
+    font-size: 16px;
+    line-height: 2.0;
+  }
+
+  .post-content :global(.cta p) {
+    margin: 0;
+    color: #fff;
+  }
+
   /* 코드 */
   .post-content :global(code) {
     background: #f4f4f4;
