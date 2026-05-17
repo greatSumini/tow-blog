@@ -1,0 +1,66 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = '여행 이야기' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="/" class="site-name">✈ TOW Blog</a>
+    </div>
+  </header>
+  <main>
+    <slot />
+  </main>
+  <footer>
+    <p>© 2026 TOW Blog</p>
+  </footer>
+</body>
+</html>
+
+<style is:global>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", sans-serif;
+    font-size: 16px;
+    color: #333;
+    background: #fff;
+  }
+  a { color: inherit; text-decoration: none; }
+  header {
+    border-bottom: 1px solid #eee;
+    padding: 14px 20px;
+  }
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .site-name {
+    font-size: 18px;
+    font-weight: 800;
+    color: #111;
+  }
+  .site-name:hover { color: #03c75a; }
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 36px 20px 80px;
+  }
+  footer {
+    border-top: 1px solid #eee;
+    padding: 24px 20px;
+    text-align: center;
+    font-size: 13px;
+    color: #aaa;
+  }
+</style>

@@ -1,0 +1,191 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  tags?: string[];
+}
+
+const { title, description, pubDate, tags = [] } = Astro.props;
+const formattedDate = pubDate.toLocaleDateString('ko-KR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="blog-post">
+    <h1 class="post-title">{title}</h1>
+    <time class="post-date">{formattedDate}</time>
+    <div class="post-content">
+      <slot />
+    </div>
+    {tags.length > 0 && (
+      <div class="post-tags">
+        {tags.map(tag => <span class="tag">#{tag}</span>)}
+      </div>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .post-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #111;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #eee;
+    word-break: keep-all;
+  }
+
+  .post-date {
+    display: block;
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 40px;
+  }
+
+  /* ── Naver Blog Content Style ── */
+  .post-content {
+    font-size: 17px;
+    line-height: 2.0;
+    color: #333;
+    word-break: keep-all;
+  }
+
+  .post-content :global(p) {
+    margin-bottom: 20px;
+  }
+
+  .post-content :global(h2) {
+    font-size: 19px;
+    font-weight: 700;
+    color: #111;
+    margin: 48px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .post-content :global(h3) {
+    font-size: 17px;
+    font-weight: 700;
+    color: #222;
+    margin: 28px 0 10px;
+  }
+
+  .post-content :global(strong) {
+    font-weight: 700;
+  }
+
+  .post-content :global(em) {
+    font-style: normal;
+    color: #555;
+  }
+
+  .post-content :global(a) {
+    color: #03c75a;
+    text-decoration: underline;
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    padding-left: 22px;
+    margin-bottom: 20px;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 8px;
+  }
+
+  .post-content :global(hr) {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 36px 0;
+  }
+
+  /* 일정표·정보 테이블 */
+  .post-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 28px;
+    font-size: 15px;
+  }
+
+  .post-content :global(th) {
+    background: #f0f0f0;
+    font-weight: 700;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+    color: #333;
+  }
+
+  .post-content :global(td) {
+    padding: 11px 14px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+
+  .post-content :global(tr:last-child td) {
+    border-bottom: none;
+  }
+
+  .post-content :global(td:first-child) {
+    font-weight: 700;
+    white-space: nowrap;
+    color: #555;
+  }
+
+  /* 이모지 정보박스 → blockquote */
+  .post-content :global(blockquote) {
+    background: #f8f8f8;
+    border-left: none;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 16px 0 24px;
+    font-size: 15px;
+    color: #444;
+    line-height: 2.0;
+  }
+
+  .post-content :global(blockquote p) {
+    margin: 0;
+  }
+
+  /* ⚠️ 솔직 단점 박스: > [!WARNING] 또는 > ⚠️ 로 시작 */
+  .post-content :global(blockquote:has(p:first-child > strong:first-child)) {
+    background: #fffbf0;
+    border-left: 3px solid #f5a623;
+    border-radius: 0 6px 6px 0;
+    color: #555;
+  }
+
+  /* 코드 */
+  .post-content :global(code) {
+    background: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* 태그 영역 */
+  .post-tags {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    line-height: 2.4;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 13px;
+    color: #03c75a;
+    margin-right: 8px;
+  }
+</style>
